@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from wrappixel.com/ampleadmin/ampleadmin-html/ampleadmin-sidebar/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Jul 2017 12:43:44 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="/plugins/images/favicon.png">
+    <title>Kisan Mitra</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+
+    <!-- chartist CSS -->
+    <link href="/plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!-- Vector CSS -->
+    <link href="/plugins/bower_components/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- animation CSS -->
+    <link href="/assets/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="/assets/css/colors/megna-dark.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"> </script>
+
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"> </script>
+<script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+
+<!-- update the version number as needed -->
+<script defer src="/__/firebase/5.0.4/firebase-app.js"></script>
+<!-- include only the Firebase features as you need -->
+<script defer src="/__/firebase/5.0.4/firebase-auth.js"></script>
+<script defer src="/__/firebase/5.0.4/firebase-database.js"></script>
+<script defer src="/__/firebase/5.0.4/firebase-messaging.js"></script>
+<script defer src="/__/firebase/5.0.4/firebase-storage.js"></script>
+<!-- initialize the SDK after all desired features are loaded -->
+<script defer src="/__/firebase/init.js"></script>
+
+<script type="text/javascript">
+
+    function signOut(){
+        alert("Sign out pressed");
+        if(firebase.auth().currentUser){
+          
+          firebase.auth().signOut();
+          window.location='./index.html';
+          
+        }
+    }
+
+</script>
+</head>
+
+<body class="fix-header">
+    <!-- ============================================================== -->
+    <!-- Preloader -->
+    <!-- ============================================================== -->
+    
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header">
+                <div class="top-left-part">
+                    <!-- Logo -->
+                    <a class="logo" href="index.html">
+                        <!-- Logo icon image, you can use font-icon also --><b>
+                        <!--This is dark logo icon--><img src="/plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+                     </b>
+                        <!-- Logo text image you can use text also --><span class="hidden-xs">
+                        <!--This is dark logo text--><img src="/plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                     </span> </a>
+                </div>
+                <!-- /Logo -->
+                <!-- Search input and Toggle icon -->
+                <ul class="nav navbar-top-links navbar-left">
+                    <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
+
+
+
+
+                </ul>
+                <ul class="nav navbar-top-links navbar-right pull-right">
+                    <li>
+                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
+                            <input type="text" placeholder="Search..." class="form-control"> <a href="#"><i class="fa fa-search"></i></a> </form>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="/plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b><span class="caret"></span> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img"><img src="/plugins/images/users/varun.jpg" alt="user" /></div>
+                                    <div class="u-text"><h4>Steave Jobs</h4><p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                            <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);" onclick="signOut();"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+
+                    <!-- /.dropdown -->
+                </ul>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+                <ul class="nav" id="side-menu">
+                    <li class="user-pro">
+                        <a href="#" class="waves-effect"><img src="/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> Steve Gection<span class="fa arrow"></span></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                            <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> <span class="hide-menu">My Balance</span></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-email"></i> <span class="hide-menu">Inbox</span></a></li>
+                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> <span class="hide-menu">Account Setting</span></a></li>
+                            <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li> <a href="./TestedSamples.html" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu">  Soil Samples <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
+
+                    </li>
+                    <li> <a href="./FarmerList.html" class="waves-effect"><i class="mdi mdi-format-color-fill fa-fw"></i> <span class="hide-menu">Farmers<span class="fa arrow"></span> <span class="label label-rouded label-info pull-right">20</span> </span></a>
+
+                    </li>
+                    <li> <a href="./UntestedSoil.html" class="waves-effect"><i class="mdi mdi-content-copy fa-fw"></i> <span class="hide-menu">UnTested Soil Samples<span class="fa arrow"></span><span class="label label-rouded label-warning pull-right">30</span></span></a>
+
+                    </li>
+                    <li><a href="./faq.html" class="waves-effect active"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">FAQs<span class="fa arrow"></span></span></a>
+
+                    </li>
+
+                    <li class="devider"></li>
+                    <li><a href="#" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span class="hide-menu">About Us</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Dashboard 3</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
+                        						<a href="javascript: void(0);" target="_blank"
+							class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"
+							data-toggle="modal" data-target="#addSoil">Add new Test Sample</a>
+
+
+                    </div>
+                    <!-- /.col-lg-12 -->
+
+                </div>
+				<!-- ============================================================== -->
+                <!-- Modal to add the test sample -->
+				<div class="modal fade" id="addSoil" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header" align="center">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Add New Test Sample</h4>
+							</div>
+
+							<div class="modal-body">
+			        <form method="post" action="addTestSample">
+
+            <div class="form-group">
+                <label class="control-label">Soil Sample Number</label>
+                <input class="form-control input-lg" type="text" name="fertilizer">
+            </div>
+            <div class="form-group">
+    <label class="control-label">Phone Number</label>
+    <input type="number" name="phone" required placeholder="9441234567" class="form-control input-lg" id="phone" />
+	</div>
+	          <div class="form-group">
+    <label class="control-label">Survey Number</label>
+    <input type="text" name="survey_num" required  placeholder="KK834HJJ" class="form-control input-lg"  />
+	</div>
+	          <div class="form-group">
+    <label class="control-label">Khasra/Dag Number</label>
+    <input type="text" name="khasra_num" required placeholder="I8023JF" class="form-control input-lg"  />
+	</div>
+	          <div class="form-group">
+    <label class="control-label">Farm Size</label>
+    <input type="text" name="farm_size" required placeholder="" class="form-control input-lg"  />
+	</div>
+	          <div class="form-group">
+    <label class="control-label">Geo position</label>
+    <input type="text" name="position" required placeholder="lattitude x longitude" class="form-control input-lg"  />
+	</div>
+	          <div class="form-group">
+    <label class="control-label">Irrigated/Rained	</label>
+    <input type="text" name="irrigated"  required placeholder="" class="form-control input-lg"  />
+	</div>
+
+    <div id="div_submit">
+        <button class="btn btn-success btn-lg" type="submit">Submit </button>
+    </div>
+</div>
+        </form>
+							</div>
+						</div>
+					</div>
+				</div>
+                <!-- ============================================================== -->
+                <!-- Other sales widgets -->
+                <!-- ============================================================== -->
+                <!-- .row -->
+                <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title"> Soil samples Tested</h3>
+									<a href="./TestedSamples.html">
+                                    <ul class="list-inline two-part">
+                                        <li><i class="icon-people text-info"></i></li>
+                                        <li class="text-right"><span class="counter">23</span></li>
+                                    </ul>
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Registered Farmers</h3>
+									<a href="./FarmerList.html">
+                                    <ul class="list-inline two-part">
+                                        <li><i class="icon-folder text-purple"></i></li>
+                                        <li class="text-right"><span class="counter">169</span></li>
+                                    </ul>
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Untested Soil</h3>
+									<a href="./UntestedSoil.html">
+                                    <ul class="list-inline two-part">
+                                        <li><i class="icon-folder-alt text-danger"></i></li>
+                                        <li class="text-right"><span class="">311</span></li>
+                                    </ul>
+									</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">FAQ</h3>
+									<a href="./faq.html">
+                                    <ul class="list-inline two-part">
+                                        <li><i class="ti-wallet text-success"></i></li>
+                                        <li class="text-right"><span class="">117</span></li>
+                                    </ul>
+									</a>
+                                </div>
+                            </div>
+                        </div>
+                <!-- /.row -->
+               <!-- ============================================================== -->
+                <!-- Extra-component -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">KVK centers</h3>
+                            <div id="usa" style="height: 365px"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title"><small class="pull-right m-t-10 text-success"><i class="fa fa-sort-asc"></i> 18% High then last month</small> Monthly Site Traffic</h3>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <h6>Overall Growth</h6> <b>80.40%</b></div>
+                                <div class="stat-item">
+                                    <h6>Montly</h6> <b>15.40%</b></div>
+                                <div class="stat-item">
+                                    <h6>Day</h6> <b>5.50%</b></div>
+                            </div>
+                            <div id="sparkline8"></div>
+                        </div>
+                        <div class="white-box">
+                            <h3 class="box-title"><small class="pull-right m-t-10 text-danger"><i class="fa fa-sort-desc"></i> 18% High then last month</small>Weekly Site Traffic</h3>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <h6>Overall Growth</h6> <b>80.40%</b></div>
+                                <div class="stat-item">
+                                    <h6>Montly</h6> <b>15.40%</b></div>
+                                <div class="stat-item">
+                                    <h6>Day</h6> <b>5.50%</b></div>
+                            </div>
+                            <div id="sparkline9"></div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- ============================================================== -->
+            <!-- city-weather -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Visit from the countries</h3>
+                        <ul class="country-state  p-t-20">
+                            <li>
+                                <h2>6350</h2> <small>From India</small>
+                                <div class="pull-right">48% <i class="fa fa-level-up text-success"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:48%;"> <span class="sr-only">48% Complete</span></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2>3250</h2> <small>From UAE</small>
+                                <div class="pull-right">98% <i class="fa fa-level-up text-success"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:98%;"> <span class="sr-only">98% Complete</span></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2>1250</h2> <small>From Australia</small>
+                                <div class="pull-right">75% <i class="fa fa-level-down text-danger"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:75%;"> <span class="sr-only">75% Complete</span></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2>1350</h2> <small>From USA</small>
+                                <div class="pull-right">48% <i class="fa fa-level-up text-success"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:48%;"> <span class="sr-only">48% Complete</span></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2>3250</h2> <small>From UAE</small>
+                                <div class="pull-right">98% <i class="fa fa-level-up text-success"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:98%;"> <span class="sr-only">98% Complete</span></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2>1250</h2> <small>From Australia</small>
+                                <div class="pull-right">75% <i class="fa fa-level-down text-danger"></i></div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:75%;"> <span class="sr-only">75% Complete</span></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    <div class="white-box bg-theme m-b-0">
+                        <div class="city-weather-widget">
+                            <h1>Kufri, Himachal Pradesh</h1>
+                            <h4>Friday, 19 Jan 2017</h4>
+                            <div class="row p-t-30">
+                                <div class="col-sm-6">
+                                    <ul class="side-icon-text">
+                                        <li><span class="di vm"><i class="wi wi-day-hail"></i></span><span class="di vm"><h1 class="m-b-0">23<sup>o</sup></h1><h5 class="m-t-0">Mostly Sunny</h5></span></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-icons pull-right text-white">
+                                        <li><i class="wi wi-day-sunny m-r-5"></i>Humidity 38%</li>
+                                        <li><i class=" wi wi-day-windy m-r-5"></i>Wind 38%</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-12">
+                                    <div id="ct-city-wth" style="height:220px"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="row">
+                            <ul class="list-unstyled city-weather-days">
+                                <li class="col-xs-4 col-sm-2"><span>Tue</span><i class="wi wi-day-sunny"></i><span>32<sup>°F</sup></span></li>
+                                <li class="col-xs-4 col-sm-2"><span>Wed</span><i class="wi wi-day-cloudy"></i><span>34<sup>°F</sup></span></li>
+                                <li class="col-xs-4 col-sm-2"><span>Thu</span><i class="wi wi-day-hail"></i><span>35<sup>°F</sup></span></li>
+                                <li class="col-xs-4 col-sm-2 active"><span>Fri</span><i class="wi wi-day-sprinkle"></i><span>34<sup>°F</sup></span></li>
+                                <li class="col-xs-4 col-sm-2"><span>Sat</span><i class="wi wi-day-snow"></i><span>30<sup>°F</sup></span></li>
+                                <li class="col-xs-4 col-sm-2"><span>Sun</span><i class="wi wi-day-sunny"></i><span>26<sup>°F</sup></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- .row -->
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Daily Sales</h3>
+                                    <div class="text-right"> <span class="text-muted">Todays Income</span>
+                                        <h1><sup><i class="ti-arrow-up text-success"></i></sup> $12,000</h1> </div> <span class="text-success">20%</span>
+                                    <div class="progress m-b-0">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:20%;"> <span class="sr-only">20% Complete</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Weekly Sales</h3>
+                                    <div class="text-right"> <span class="text-muted">Weekly Income</span>
+                                        <h1><sup><i class="ti-arrow-down text-danger"></i></sup> $5,000</h1> </div> <span class="text-danger">30%</span>
+                                    <div class="progress m-b-0">
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:30%;"> <span class="sr-only">230% Complete</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Monthly Sales</h3>
+                                    <div class="text-right"> <span class="text-muted">Monthly Income</span>
+                                        <h1><sup><i class="ti-arrow-up text-info"></i></sup> $10,000</h1> </div> <span class="text-info">60%</span>
+                                    <div class="progress m-b-0">
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:60%;"> <span class="sr-only">20% Complete</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="white-box">
+                                    <h3 class="box-title">Yearly Sales</h3>
+                                    <div class="text-right"> <span class="text-muted">Yearly Income</span>
+                                        <h1><sup><i class="ti-arrow-up text-inverse"></i></sup> $9,000</h1> </div> <span class="text-inverse">80%</span>
+                                    <div class="progress m-b-0">
+                                        <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:80%;"> <span class="sr-only">230% Complete</span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 col-xs-12">
+                        <div class="news-slide m-b-30 dashboard-slide">
+                            <div class="vcarousel slide" >
+                                <!-- Carousel items -->
+                                <div class="carousel-inner">
+                                    <div class="active item">
+                                        <div class="overlaybg"><img src="/plugins/images/heading-bg/slide6.jpg" /></div>
+                                        <div class="news-content"><span class="label label-danger label-rounded">Primary</span>
+                                            <h2>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="overlaybg"><img src="/plugins/images/heading-bg/slide4.jpg" /></div>
+                                        <div class="news-content"><span class="label label-primary label-rounded">Primary</span>
+                                            <h2>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a></div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="overlaybg"><img src="/plugins/images/heading-bg/slide6.jpg" /></div>
+                                        <div class="news-content"><span class="label label-success label-rounded">Primary</span>
+                                            <h2>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h2> <a href="#">Read More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <!-- ============================================================== -->
+            <!-- Demo table -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">MANAGE USERS</div>
+                        <div class="table-responsive">
+                            <table class="table table-hover manage-u-table">
+                                <thead>
+                                    <tr>
+                                        <th width="70" class="text-center">#</th>
+                                        <th>NAME</th>
+                                        <th>OCCUPATION</th>
+                                        <th>EMAIL</th>
+                                        <th>ADDED</th>
+                                        <th width="250">CATEGORY</th>
+                                        <th width="300">MANAGE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">4</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="text-center">5</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">6</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">7</td>
+                                        <td><span class="font-medium">Daniel Kristeen</span>
+                                            <br/><span class="text-muted">Texas, Unitedd states</span></td>
+                                        <td>Visual Designer
+                                            <br/><span class="text-muted">Past : teacher</span></td>
+                                        <td>daniel@website.com
+                                            <br/><span class="text-muted">999 - 444 - 555</span></td>
+                                        <td>15 Mar 1988
+                                            <br/><span class="text-muted">10: 55 AM</span></td>
+                                        <td>
+                                            <select class="form-control">
+                                                <option>Modulator</option>
+                                                <option>Admin</option>
+                                                <option>User</option>
+                                                <option>Subscriber</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
+                                            <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- ============================================================== -->
+                <!-- Right sidebar -->
+                <!-- ============================================================== -->
+                <!-- .right-sidebar -->
+                <div class="right-sidebar">
+                    <div class="slimscrollright">
+                        <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
+                        <div class="r-panel-body">
+                            <ul id="themecolors" class="m-t-20">
+                                <li><b>With Light sidebar</b></li>
+                                <li><a href="javascript:void(0)" theme="default" class="default-theme">1</a></li>
+                                <li><a href="javascript:void(0)" theme="green" class="green-theme">2</a></li>
+                                <li><a href="javascript:void(0)" theme="gray" class="yellow-theme">3</a></li>
+                                <li><a href="javascript:void(0)" theme="blue" class="blue-theme">4</a></li>
+                                <li><a href="javascript:void(0)" theme="purple" class="purple-theme">5</a></li>
+                                <li><a href="javascript:void(0)" theme="megna" class="megna-theme">6</a></li>
+                                <li><b>With Dark sidebar</b></li>
+                                <br/>
+                                <li><a href="javascript:void(0)" theme="default-dark" class="default-dark-theme">7</a></li>
+                                <li><a href="javascript:void(0)" theme="green-dark" class="green-dark-theme">8</a></li>
+                                <li><a href="javascript:void(0)" theme="gray-dark" class="yellow-dark-theme">9</a></li>
+                                <li><a href="javascript:void(0)" theme="blue-dark" class="blue-dark-theme">10</a></li>
+                                <li><a href="javascript:void(0)" theme="purple-dark" class="purple-dark-theme">11</a></li>
+                                <li><a href="javascript:void(0)" theme="megna-dark" class="megna-dark-theme working">12</a></li>
+                            </ul>
+                            <ul class="m-t-20 all-demos">
+                                <li><b>Choose other demos</b></li>
+                            </ul>
+                            <ul class="m-t-20 chatonline">
+                                <li><b>Chat option</b></li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/genu.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/hritik.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/john.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"><img src="/plugins/images/users/pawandeep.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- /.container-fluid -->
+            <footer class="footer text-center"> 2017 &copy; Ampleadmin brought to you by themedesigner.in </footer>
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--Counter js -->
+    <script src="/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+
+    <!--Wave Effects -->
+    <script src="/assets/js/waves.js"></script>
+    <!-- Vector map JavaScript -->
+    <script src="/plugins/bower_components/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/plugins/bower_components/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/plugins/bower_components/vectormap/jquery-jvectormap-in-mill.js"></script>
+    <script src="/plugins/bower_components/vectormap/jquery-jvectormap-us-aea-en.js"></script>
+    <!-- chartist chart -->
+    <script src="/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+    <script src="/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!-- sparkline chart JavaScript -->
+    <script src="/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/assets/js/custom.min.js"></script>
+    <script src="/assets/js/dashboard3.js"></script>
+    <!--Style Switcher -->
+    <script src="/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+</body>
+
+
+<!-- Mirrored from wrappixel.com/ampleadmin/ampleadmin-html/ampleadmin-sidebar/index3.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Jul 2017 12:43:47 GMT -->
+</html>

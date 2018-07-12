@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <meta charset=utf-8 />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email/Password Authentication Example</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" type="image/png" sizes="16x16" href="/plugins/images/favicon.png">
+  <title>Kisan Mitra</title>
+  <!-- Bootstrap Core CSS -->
+  <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- animation CSS -->
+  <link href="/assets/css/animate.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <!-- color CSS -->
+  <link href="/assets/css/colors/blue.css" id="theme"  rel="stylesheet">
+  <!-- Material Design Theming -->
+  
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"> </script>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.0.4/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.0.4/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script type="text/javascript">
+      /**
+       * Handles the sign in button press.
+       */
+      function toggleSignIn() {
+        if(firebase.auth().currentUser){
+          
+          firebase.auth().signOut();
+          document.getElementById('login_buutton').textContent = 'Login';
+          
+        }
+    else{
+         var email = document.getElementById('email').value;
+          var password = document.getElementById('password').value;
+          // Sign in with email and pass.
+          // [START authwithemail]
+          firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode === 'auth/wrong-password') {
+              alert('Wrong password.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+            
+            //document.getElementById('quickstart-sign-in').disabled = false;
+            // [END_EXCLUDE]
+          });
+          // [END authwithemail]
+        }
+        
+        
+      }
+      /**
+       * Handles the sign up button press.
+       */
+      function handleSignUp() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START createwithemail]
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/weak-password') {
+            alert('The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+        // [END createwithemail]
+      }
+      /**
+       * Sends an email verification to the user.
+       */
+      function sendEmailVerification() {
+        // [START sendemailverification]
+        firebase.auth().currentUser.sendEmailVerification().then(function() {
+          // Email Verification sent!
+          // [START_EXCLUDE]
+          alert('Email Verification Sent!');
+          // [END_EXCLUDE]
+        });
+        // [END sendemailverification]
+      }
+      function sendPasswordReset() {
+        var email = document.getElementById('email').value;
+        // [START sendpasswordemail]
+        firebase.auth().sendPasswordResetEmail(email).then(function() {
+          // Password Reset Email Sent!
+          // [START_EXCLUDE]
+          alert('Password Reset Email Sent!');
+          // [END_EXCLUDE]
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/invalid-email') {
+            alert(errorMessage);
+          } else if (errorCode == 'auth/user-not-found') {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+        // [END sendpasswordemail];
+      }
+      function signOout(){
+        firebase.auth().signOut();
+        document.getElementById('logout_buutton').disabled = true;
+      }
+      /**
+       * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+       *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+       *    out, and that is where we update the UI.
+       */
+      function initApp() {
+        // Listening for auth state changes.
+        // [START authstatelistener]
+        firebase.auth().onAuthStateChanged(function(user) {
+          // [START_EXCLUDE silent]
+          
+          // [END_EXCLUDE]
+          if (user) {
+            // User is signed in.
+            document.getElementById('login_buutton').textContent = "Logout";
+            //document.getElementById('instr').textContent = JSON.stringify(user, null, '  ');
+            window.location="/dashboard.html"
+              
+            // [END_EXCLUDE]
+          } else{
+            
+            
+          }
+          // [START_EXCLUDE silent]
+          
+          // [END_EXCLUDE]
+        });
+
+        // [END authstatelistener]
+        
+
+      }
+      window.onload = function() {
+        
+        initApp();
+      };
+    </script>
+  
+  </head>
+  <body>
+    <section id="wrapper" class="login-register">
+      <div class="login-box">
+        <div class="white-box">
+          <form class="form-horizontal form-material" id="loginform" action="">
+            <a href="javascript:void(0)" class="text-center db"><img src="/plugins/images/admin-logo-dark.png" alt="Home" /><br/><img src="/plugins/images/admin-text-dark.png" alt="Home" /></a>  
+            
+            <div class="form-group m-t-40">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" required="" placeholder="Email" id="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input class="form-control" type="password" required="" placeholder="Password" id="password"> 
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12">
+
+                <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+              <div class="col-xs-12">
+               <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="button" onclick="toggleSignIn()" id="login_buutton" >Log In</button>
+              </div>
+            </div>
+            <div class="form-group m-b-0">
+              <div class="col-sm-12 text-center">
+                <p>Don't have an account? <a href="./register3.html" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+              </div>
+            </div>
+          </form>
+          <form class="form-horizontal" id="recoverform" action="https://wrappixel.com/ampleadmin/ampleadmin-html/ampleadmin-sidebar/index.html">
+            <div class="form-group ">
+              <div class="col-xs-12">
+                <h3>Recover Password</h3>
+                <p class="text-muted" >Enter your Email and instructions will be sent to you! </p>
+              </div>
+            </div>
+            <div class="form-group ">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" required="" placeholder="Email">
+              </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+              <div class="col-xs-12">
+                <button class="btn btn-primary btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Reset</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- jQuery -->
+    <script src="/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    
+    <!--slimscroll JavaScript -->
+    <script src="/assets/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="/assets/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="/assets/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+   
+  </body>
+</html>
