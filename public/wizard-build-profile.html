@@ -23,6 +23,72 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link href="assets/css/demo.css" rel="stylesheet" />
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"> </script>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+	 <!-- update the version number as needed -->
+	 <script defer src="/__/firebase/5.0.4/firebase-app.js"></script>
+	 <!-- include only the Firebase features as you need -->
+	 <script defer src="/__/firebase/5.0.4/firebase-auth.js"></script>
+	 <script defer src="/__/firebase/5.0.4/firebase-database.js"></script>
+	 <script defer src="/__/firebase/5.0.4/firebase-messaging.js"></script>
+	 <script defer src="/__/firebase/5.0.4/firebase-storage.js"></script>
+	 <!-- initialize the SDK after all desired features are loaded -->
+	 <script defer src="/__/firebase/init.js"></script>
+	 <script type="text/javascript">
+		var config = {
+		apiKey: "AIzaSyC5RdTPHSkQh3JeIqkYjXGQWsfBEFSGcVg",
+		authDomain: "xeroxapp-a0093.firebaseapp.com",
+		databaseURL: "https://xeroxapp-a0093.firebaseio.com",
+		storageBucket: "gs://xeroxapp-a0093.appspot.com"
+	  };
+	  firebase.initializeApp(config);
+	
+	  // Get a reference to the database service
+	  
+	
+		function writeNewPost() {
+			
+			var name = document.getElementById("firstname").value;
+			var pnumber = document.getElementById("phoneNumber").value;
+			var xemail = document.getElementById("xemail").value;
+	  // A post entry.
+		  var postData = {
+			name: name,
+			pnumber: pnumber,
+			xemail: xemail,
+			
+			
+	  };
+	
+	  // Get a key for a new Post.
+	  var newPostKey = firebase.database().ref().child('xerox').push().key;
+	
+	  // Write the new post's data simultaneously in the posts list and the user's post list.
+	  //var updates = {};
+	  //updates['/xerox/' + newPostKey] = postData;
+	  return firebase.database().ref('xerox/' + newPostKey).set(postData,function(error) {
+    if (error) {
+      alert(error)
+    } else {
+		window.location="./index.html";
+      // Data saved successfully!
+    }
+  });
+	
+	  //return firebase.database().ref().update(updates);
+	 
+	}
+
+	function onFinishClick(){
+		var checkSuccess = writeNewPost();
+	
+		
+	}
+		
+		</script>
+	
 </head>
 
 <body>
@@ -94,7 +160,7 @@
 													</span>
 													<div class="form-group label-floating">
 													  <label class="control-label">Phone number <small>(required)</small></label>
-													  <input name="pnumber" type="text" class="form-control">
+													  <input name="pnumber" type="text" class="form-control" id="phoneNumber">
 													</div>
 												</div>
 		                                	</div>
@@ -105,7 +171,7 @@
 													</span>
 													<div class="form-group label-floating">
 			                                            <label class="control-label">Email <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
+			                                            <input name="email" type="email" class="form-control" id="xemail">
 			                                        </div>
 												</div>
 		                                	</div>
@@ -225,7 +291,7 @@
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
 		                                <input type='button' class='btn btn-next btn-fill btn-warning btn-wd' name='next' value='Next' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Finish' />
+		                                <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd' name='finish' value='Finish' onclick="onFinishClick();"/>
 		                            </div>
 
 		                            <div class="pull-left">
@@ -259,4 +325,5 @@
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="assets/js/jquery.validate.min.js"></script>
 
+	
 </html>
