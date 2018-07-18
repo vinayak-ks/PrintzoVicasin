@@ -276,7 +276,29 @@
                 </div>
                 <!-- New Addition End -->
 
-            </div>
+                <div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" align="center">
+                                <button type="button" class="close" data-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel"> Do you want to add ?</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-group">
+                                    <label class="control-label">SampleNumber</label>
+                                    <input class="form-control" type="text" readonly name="sampleno" id="sampleno">
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                    </div>
+                 
+                 </div>
 
 
           </div>
@@ -300,6 +322,22 @@
   <script src="/assets/js/now-ui-dashboard.min.js?v=1.1.0" type="text/javascript"></script>
   <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <script src="../assets/demo/demo.js"></script>
+  <script>
+      /* action on show of delete modal */
+
+  $('#addDetails')
+              .on('show.bs.modal',
+
+                    function(e) {
+
+                        var sampleID = $(e.relatedTarget).data('id');
+                        var modal = $(this)
+                        modal.find('.modal-title').text('User id : ' + sampleID)
+                        /* Set the var to the inner html */
+                        document.getElementById('sampleno').value = sampleID;
+
+                    });
+</script>
   <script>
     $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js

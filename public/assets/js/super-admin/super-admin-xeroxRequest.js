@@ -12,9 +12,9 @@
 
 
 ref = firebase.database().ref('/xerox') ;
-function createUserFromRow(xyz){
-
-  alert(xyz);
+function createUserFromRow(email){
+  
+  
 }
 console.log("This is doing ! ") ;
 ref.once('value', snap=>{
@@ -27,7 +27,7 @@ ref.once('value', snap=>{
     
     $('#xeroxRequestEntries').append(`
     <tr>
-    <td class="text-center">${sample_no}</td>
+    <td class="text-center" id="">${sample_no}</td>
     <td><span class="font-medium">${data.name}</span>
        
     <td>Visual Designer
@@ -45,10 +45,8 @@ ref.once('value', snap=>{
         </select>
     </td>
     <td>
-        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key" onCLick="createUserFromRow('${data.xemail}');"></i></button>
+     <a href="javascript: void(0);" target="_blank" data-toggle="modal" data-id=${sample_no} data-target="#addUser"><button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key" </i></button> </a>
         <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
-        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
     </td>
 </tr>
     `) ; 

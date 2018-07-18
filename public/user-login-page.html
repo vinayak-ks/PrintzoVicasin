@@ -16,6 +16,152 @@
   <!-- CSS Files -->
   <link href="../assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"> </script>
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"> </script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/5.0.4/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/5.0.4/firebase-auth.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-database.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/5.0.4/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script type="text/javascript">
+      /**
+       * Handles the sign in button press.
+       */
+      function toggleSignIn() {
+         var email = document.getElementById('email').value;
+         var password = document.getElementById('password').value;
+          // Sign in with email and pass.
+          // [START authwithemail]
+          firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode === 'auth/wrong-password') {
+              alert('Wrong password.');
+            } else {
+              alert(errorMessage);
+            }
+            console.log(error);
+            
+            //document.getElementById('quickstart-sign-in').disabled = false;
+            // [END_EXCLUDE]
+          });
+          // [END authwithemail]
+        
+        
+        
+      }
+      /**
+       * Handles the sign up button press.
+       */
+      function handleSignUp() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+        // Sign in with email and pass.
+        // [START createwithemail]
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/weak-password') {
+            alert('The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+        // [END createwithemail]
+      }
+      /**
+       * Sends an email verification to the user.
+       */
+      function sendEmailVerification() {
+        // [START sendemailverification]
+        firebase.auth().currentUser.sendEmailVerification().then(function() {
+          // Email Verification sent!
+          // [START_EXCLUDE]
+          alert('Email Verification Sent!');
+          // [END_EXCLUDE]
+        });
+        // [END sendemailverification]
+      }
+      function sendPasswordReset() {
+        var email = document.getElementById('email').value;
+        // [START sendpasswordemail]
+        firebase.auth().sendPasswordResetEmail(email).then(function() {
+          // Password Reset Email Sent!
+          // [START_EXCLUDE]
+          alert('Password Reset Email Sent!');
+          // [END_EXCLUDE]
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // [START_EXCLUDE]
+          if (errorCode == 'auth/invalid-email') {
+            alert(errorMessage);
+          } else if (errorCode == 'auth/user-not-found') {
+            alert(errorMessage);
+          }
+          console.log(error);
+          // [END_EXCLUDE]
+        });
+        // [END sendpasswordemail];
+      }
+      function signOout(){
+        firebase.auth().signOut();
+        var x = document.getElementById("fileUpload");
+         x.style.display = "none";
+         var y = document.getElementById("loginform");
+          y.style.display = "block";
+
+        //document.getElementById('logout_buutton').disabled = true;
+      }
+      /**
+       * initApp handles setting up UI event listeners and registering Firebase auth listeners:
+       *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
+       *    out, and that is where we update the UI.
+       */
+      function initApp() {
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            var x = document.getElementById("fileUpload");
+             x.style.display = "block";
+             var y = document.getElementById("loginform");
+             y.style.display = "none";
+            
+          } else{
+            
+            var y = document.getElementById("loginform");
+             y.style.display = "block";
+
+          }
+        });
+      }
+      window.onload = function() {
+        
+        initApp();
+      };
+    </script>
 
 </head>
 
@@ -23,8 +169,7 @@
   <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
-          Material Kit </a>
+        <a class="navbar-brand" href="#">Printzo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="sr-only">Toggle navigation</span>
           <span class="navbar-toggler-icon"></span>
@@ -39,8 +184,8 @@
               <i class="material-icons">apps</i> Components
             </a>
             <div class="dropdown-menu dropdown-with-icons">
-              <a href="../index.html" class="dropdown-item">
-                <i class="material-icons">layers</i> All Components
+              <a href="javascript:signOout();" class="dropdown-item">
+                <i class="material-icons"></i> LogOut
               </a>
               <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
                 <i class="material-icons">content_paste</i> Documentation
@@ -71,10 +216,10 @@
       </div>
     </div>
   </nav>
-  <div class="page-header header-filter" style="background-image: url('../assets/img/wizard-city.jpg'); background-size: cover; background-position: top center;">
+  <div class="page-header header-filter" style="background-image: url('/plugins/images/login-register.jpg'); background-size: cover; background-position: top center;">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="col-lg-4" id="loginform" style="display:none" >
           <div class="card card-login">
             <form class="form" method="" action="">
               <div class="card-header card-header-primary text-center">
@@ -93,21 +238,21 @@
               </div>
               <p class="description text-center">Or Be Classical</p>
               <div class="card-body">
-                <div class="input-group">
+                <!-- <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">face</i>
                     </span>
                   </div>
                   <input type="text" class="form-control" placeholder="First Name...">
-                </div>
+                </div> -->
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="material-icons">mail</i>
                     </span>
                   </div>
-                  <input type="email" class="form-control" placeholder="Email...">
+                  <input type="email" class="form-control" placeholder="Email..." id="email">
                 </div>
                 <div class="input-group">
                   <div class="input-group-prepend">
@@ -115,23 +260,77 @@
                       <i class="material-icons">lock_outline</i>
                     </span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password...">
-                </div>
-                                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="material-icons">lock_outline</i>
-                    </span>
-                  </div>
-                  <input type="password" class="form-control" placeholder="Password...">
+                  <input type="password" class="form-control" placeholder="Password..." id="password">
                 </div>
               </div>
               <div class="footer text-center">
-                <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+                <a href="javascript:toggleSignIn();" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
               </div>
             </form>
           </div>
         </div>
+
+
+
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto" id="fileUpload" style="display:none">
+            <div class="card card-login">
+              <form class="form" method="" action="">
+                <div class="card-header card-header-primary text-center">
+                  <h4 class="card-title">Printzo</h4>
+                  <div class="social-line">
+                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                      <i class="fa fa-facebook-square"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#pablo" class="btn btn-just-icon btn-link">
+                      <i class="fa fa-google-plus"></i>
+                    </a>
+                  </div>
+                </div>
+                <p class="description text-center">Or Be Classical</p>
+                <div class="card-body">
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">face</i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="First Name...">
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">mail</i>
+                      </span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email...">
+                  </div>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password...">
+                  </div>
+                                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password...">
+                  </div>
+                </div>
+                <div class="footer text-center">
+                  <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          
       </div>
     </div>
     <footer class="footer">
@@ -171,6 +370,7 @@
     </footer>
   </div>
   <!--   Core JS Files   -->
+
   <script src="../assets/js/core/jquery.min.js" type="text/javascript"></script>
   <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
   <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
