@@ -187,7 +187,7 @@
               <a href="javascript:signOout();" class="dropdown-item">
                 <i class="material-icons"></i> LogOut
               </a>
-              <a href="https://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+              <a href="#" class="dropdown-item">
                 <i class="material-icons">content_paste</i> Documentation
               </a>
             </div>
@@ -272,7 +272,7 @@
 
 
 
-        <div class="col-lg-4 col-md-6 ml-auto mr-auto" id="fileUpload" style="display:none">
+        <div class="col-lg-4 col-md-6" id="fileUpload" style="display:none">
             <div class="card card-login">
               <form class="form" method="" action="">
                 <div class="card-header card-header-primary text-center">
@@ -305,7 +305,14 @@
                         <i class="material-icons">mail</i>
                       </span>
                     </div>
-                    <input type="email" class="form-control" placeholder="Email...">
+                    <select name="city" class="form-control" placeholde="city">
+                        <option disabled="" selected=""></option>
+                        <option value="Bengaluru"> Bengaluru </option>
+                        <option value="Tumakuru"> Tumakuru </option>
+                        <option value="Hospet"> Hospet </option>
+                        <option value="Shivmoga"> Shivmoga </option>
+                        <option value="...">...</option>
+                    </select>
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -313,20 +320,37 @@
                         <i class="material-icons">lock_outline</i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password...">
+                    <select name="area" class="form-control" placeholde="city">
+                        <option disabled="" selected=""></option>
+                        <option value="Bengaluru"> K.S Layout </option>
+                        <option value="Tumakuru"> SIT </option>
+                        
+                        <option value="...">...</option>
+                    </select>
                   </div>
-                                  <div class="input-group">
+                  <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="material-icons">lock_outline</i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password...">
+                    <select name="xerox shop" class="form-control" placeholde="city">
+                        <option disabled="" selected=""></option>
+                        <option value="xid"> SIT Campus </option>
+                        <option value="Tumakuru"> SIT </option>
+                        
+                        <option value="...">...</option>
+                    </select>
                   </div>
+                  <div class="input-group">
+                     
+                      <input type="file" class="form-control">
+                    </div>
                 </div>
-                <div class="footer text-center">
-                  <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
-                </div>
+                <div class="input-group text-center">
+                    <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+                  </div>
+
               </form>
             </div>
           </div>
@@ -338,8 +362,8 @@
         <nav class="float-left">
           <ul>
             <li>
-              <a href="https://www.creative-tim.com">
-                Creative Tim
+              <a href="#">
+                ViCaSiN
               </a>
             </li>
             <li>
@@ -364,7 +388,7 @@
           <script>
             document.write(new Date().getFullYear())
           </script>, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          <a href="https://www.creative-tim.com" target="_blank">ViCaSiN</a> for a better web.
         </div>
       </div>
     </footer>
