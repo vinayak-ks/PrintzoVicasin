@@ -1,150 +1,41 @@
-[debug] [2018-07-16T09:00:38.682Z] ----------------------------------------------------------------------
-[debug] [2018-07-16T09:00:38.683Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vins0617\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-07-16T09:00:38.684Z] CLI Version:   3.19.0
-[debug] [2018-07-16T09:00:38.684Z] Platform:      win32
-[debug] [2018-07-16T09:00:38.684Z] Node Version:  v8.9.4
-[debug] [2018-07-16T09:00:38.684Z] Time:          Mon Jul 16 2018 14:30:38 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:38.684Z] ----------------------------------------------------------------------
+[debug] [2018-07-24T16:44:42.685Z] ----------------------------------------------------------------------
+[debug] [2018-07-24T16:44:42.688Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-07-24T16:44:42.688Z] CLI Version:   3.17.4
+[debug] [2018-07-24T16:44:42.689Z] Platform:      darwin
+[debug] [2018-07-24T16:44:42.689Z] Node Version:  v9.4.0
+[debug] [2018-07-24T16:44:42.689Z] Time:          Tue Jul 24 2018 22:14:42 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:42.689Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-07-16T09:00:38.723Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-07-16T09:00:38.723Z] > authorizing via signed-in user
-[debug] [2018-07-16T09:00:38.724Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-07-16T09:00:38.725Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- { refresh_token: '1/H2UNIf09mWlKaKG0S-B7JlXJCuYvB8b1X1eBf0ZBINQ',
+[debug] [2018-07-24T16:44:42.717Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-07-24T16:44:42.717Z] > authorizing via signed-in user
+[debug] [2018-07-24T16:44:42.719Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-07-24T16:44:42.720Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/zhnWsujlzHEB0YWuge-I_v65_6LortEr8udL8_zlzrA',
   client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
   client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
   grant_type: 'refresh_token',
   scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Mon Jul 16 2018 14:30:38 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:38.998Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-16T09:00:39.035Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xeroxapp-a0093  
+ Tue Jul 24 2018 22:14:42 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:43.127Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T16:44:43.145Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xeroxapp-a0093  
   
- Mon Jul 16 2018 14:30:39 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:40.423Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-16T09:00:40.424Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xeroxapp-a0093/tokens  
+ Tue Jul 24 2018 22:14:43 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:47.001Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T16:44:47.001Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xeroxapp-a0093/tokens  
   
- Mon Jul 16 2018 14:30:40 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:41.942Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-16T09:00:41.943Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/xeroxapp-a0093  
-  
- Mon Jul 16 2018 14:30:41 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:43.542Z] <<< HTTP RESPONSE 200
+ Tue Jul 24 2018 22:14:47 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:48.630Z] <<< HTTP RESPONSE 200
 [info] 
-[info] === Serving from 'C:\Users\vins0617\Documents\GitHub\NewFolder'...
+[info] === Serving from '/Users/vinayak2407/Documents/GitHub/PrintzoVicasin'...
 [info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2018-07-16T09:00:54.502Z] Fetching environment
-[debug] [2018-07-16T09:00:54.506Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698:getServerAppConfig  
+[debug] [2018-07-24T16:44:48.634Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/xeroxapp-a0093  
   
- Mon Jul 16 2018 14:30:54 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:54.507Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698/clients/_:getWebAppConfig  
+ Tue Jul 24 2018 22:14:48 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:50.672Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-24T16:44:50.672Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698/clients/_:getWebAppConfig  
   
- Mon Jul 16 2018 14:30:54 GMT+0530 (India Standard Time)
-[debug] [2018-07-16T09:00:55.394Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-16T09:00:55.644Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-16T09:00:55.644Z] Starting @google-cloud/functions-emulator
+ Tue Jul 24 2018 22:14:50 GMT+0530 (IST)
+[debug] [2018-07-24T16:44:51.790Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Local server: http://localhost:5000
 
-[debug] [2018-07-16T09:01:00.936Z] Parsing function triggers
-[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.
-[debug] [2018-07-17T06:34:33.246Z] ----------------------------------------------------------------------
-[debug] [2018-07-17T06:34:33.266Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vins0617\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-07-17T06:34:33.266Z] CLI Version:   3.19.0
-[debug] [2018-07-17T06:34:33.266Z] Platform:      win32
-[debug] [2018-07-17T06:34:33.266Z] Node Version:  v8.9.4
-[debug] [2018-07-17T06:34:33.266Z] Time:          Tue Jul 17 2018 12:04:33 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:33.266Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2018-07-17T06:34:33.340Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-07-17T06:34:33.340Z] > authorizing via signed-in user
-[debug] [2018-07-17T06:34:33.340Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-07-17T06:34:33.340Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- { refresh_token: '1/H2UNIf09mWlKaKG0S-B7JlXJCuYvB8b1X1eBf0ZBINQ',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Tue Jul 17 2018 12:04:33 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:33.764Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-17T06:34:33.894Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xeroxapp-a0093  
-  
- Tue Jul 17 2018 12:04:33 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:35.251Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-17T06:34:35.251Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xeroxapp-a0093/tokens  
-  
- Tue Jul 17 2018 12:04:35 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:36.122Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-17T06:34:36.122Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/xeroxapp-a0093  
-  
- Tue Jul 17 2018 12:04:36 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:37.672Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\Users\vins0617\Documents\GitHub\NewFolder'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2018-07-17T06:34:49.116Z] Fetching environment
-[debug] [2018-07-17T06:34:49.146Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698:getServerAppConfig  
-  
- Tue Jul 17 2018 12:04:49 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:49.146Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698/clients/_:getWebAppConfig  
-  
- Tue Jul 17 2018 12:04:49 GMT+0530 (India Standard Time)
-[debug] [2018-07-17T06:34:49.960Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-17T06:34:49.960Z] Starting @google-cloud/functions-emulator
-[debug] [2018-07-17T06:34:50.270Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
-
-[debug] [2018-07-17T06:34:55.785Z] Parsing function triggers
-[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.
-[debug] [2018-07-18T07:20:49.355Z] ----------------------------------------------------------------------
-[debug] [2018-07-18T07:20:49.363Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vins0617\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-07-18T07:20:49.363Z] CLI Version:   3.19.0
-[debug] [2018-07-18T07:20:49.363Z] Platform:      win32
-[debug] [2018-07-18T07:20:49.363Z] Node Version:  v8.9.4
-[debug] [2018-07-18T07:20:49.368Z] Time:          Wed Jul 18 2018 12:50:49 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:20:49.368Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2018-07-18T07:20:49.452Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-07-18T07:20:49.453Z] > authorizing via signed-in user
-[debug] [2018-07-18T07:20:49.455Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-07-18T07:20:49.455Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- { refresh_token: '1/H2UNIf09mWlKaKG0S-B7JlXJCuYvB8b1X1eBf0ZBINQ',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Wed Jul 18 2018 12:50:49 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:20:49.755Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-18T07:20:49.792Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/xeroxapp-a0093  
-  
- Wed Jul 18 2018 12:50:49 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:20:51.435Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-18T07:20:51.436Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/xeroxapp-a0093/tokens  
-  
- Wed Jul 18 2018 12:50:51 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:20:52.353Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-18T07:20:52.356Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/xeroxapp-a0093  
-  
- Wed Jul 18 2018 12:50:52 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:20:52.906Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\Users\vins0617\Documents\GitHub\NewFolder'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2018-07-18T07:21:02.610Z] Fetching environment
-[debug] [2018-07-18T07:21:02.613Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698:getServerAppConfig  
-  
- Wed Jul 18 2018 12:51:02 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:21:02.613Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/298269875698/clients/_:getWebAppConfig  
-  
- Wed Jul 18 2018 12:51:02 GMT+0530 (India Standard Time)
-[debug] [2018-07-18T07:21:03.430Z] <<< HTTP RESPONSE 200
-[debug] [2018-07-18T07:21:03.430Z] Starting @google-cloud/functions-emulator
-[debug] [2018-07-18T07:21:03.574Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
-
-[debug] [2018-07-18T07:21:08.929Z] Parsing function triggers
-[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.

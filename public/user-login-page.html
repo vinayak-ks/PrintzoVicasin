@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- CSS Files -->
   <link href="../assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+  
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"> </script>
 
@@ -74,21 +75,7 @@
           alert('Please enter a password.');
           return;
         }
-        // Sign in with email and pass.
-        // [START createwithemail]
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // [START_EXCLUDE]
-          if (errorCode == 'auth/weak-password') {
-            alert('The password is too weak.');
-          } else {
-            alert(errorMessage);
-          }
-          console.log(error);
-          // [END_EXCLUDE]
-        });
+
         // [END createwithemail]
       }
       /**
@@ -136,6 +123,32 @@
 
         //document.getElementById('logout_buutton').disabled = true;
       }
+      
+      function LoginWithGmail(){
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+  // The signed-in user info.
+       var user = result.user;
+       console.log("Current User"+firebase.auth().currentUser.uid);
+  // ...
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // The email of the user's account used.
+  var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
+
+      
+}
+
+
+
       /**
        * initApp handles setting up UI event listeners and registering Firebase auth listeners:
        *  - firebase.auth().onAuthStateChanged: This listener is called when the user is signed in or
@@ -157,6 +170,53 @@
           }
         });
       }
+
+
+      // file upload start
+      
+        function myFileUpload(){
+          var downloadURL;
+          var file = document.getElementById("fileUploadActual").files[0];
+          console.log(file.name);
+          var storageRef = firebase.storage().ref(firebase.auth().currentUser.uid);
+          var thisRef = storageRef.child(file.name);
+
+  //put request upload file to firebase storage
+  thisRef.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+});
+
+  
+
+  
+  }
+
+
+  function signUp(){
+
+    var loginDiv = document.getElementById('loginDiv');
+    loginDiv.style.display="none";
+    var cpass = document.getElementById("confirmPass");
+    cpass.style.display="block";
+    var signUpStart = document.getElementById("signUpStart");
+    signUpStart.style.display = "none";
+    var LoginStart = document.getElementById("LoginStart");
+    LoginStart.style.display="block";
+
+  }
+  function loginStart(){
+    var loginDiv = document.getElementById('loginDiv');
+    loginDiv.style.display="block";
+    var cpass = document.getElementById("confirmPass");
+    cpass.style.display="none";
+    var signUpStart = document.getElementById("signUpStart");
+    signUpStart.style.display = "block";
+    var LoginStart = document.getElementById("LoginStart");
+    LoginStart.style.display="none";
+  
+  }
+        
+      // file upload end
       window.onload = function() {
         
         initApp();
@@ -193,7 +253,7 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
+            <a class="nav-link" href="javascript:createUser();" >
               <i class="material-icons">cloud_download</i> Download
             </a>
           </li>
@@ -224,19 +284,11 @@
             <form class="form" method="" action="">
               <div class="card-header card-header-primary text-center">
                 <h4 class="card-title">Printzo</h4>
-                <div class="social-line">
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-facebook-square"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-twitter"></i>
-                  </a>
-                  <a href="#pablo" class="btn btn-just-icon btn-link">
-                    <i class="fa fa-google-plus"></i>
-                  </a>
-                </div>
+                
               </div>
-              <p class="description text-center">Or Be Classical</p>
+              
+
+              
               <div class="card-body">
                 <!-- <div class="input-group">
                   <div class="input-group-prepend">
@@ -262,9 +314,40 @@
                   </div>
                   <input type="password" class="form-control" placeholder="Password..." id="password">
                 </div>
+                <div style="display:none" id="confirmPass">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div> 
+                    <input type="password" class="form-control" placeholder="Confirm Password..." id="cpassword">
+                    </div>
+                    <div class="text-center">
+                      <br>
+                      <a href="javascript:toggleSignIn();" class="btn btn-new btn-primary btn-fill btn-round"> Sign Up</a>
+
+                    </div>
+
+                  </div>
+                <div class="social-line" id="loginDiv" style="display:block"> 
+                  <a href="javascript:toggleSignIn();" class="btn btn-new btn-primary btn-fill btn-round"> Login</a>
+                  <span class="description">Or</span>
+                  <a href="javascript:LoginWithGmail();" class="btn btn-new btn-primary btn-fill btn-round">
+                      <i class="fa fa-google-plus"></i>
+                    </a>
+
+                </div>
+
+
               </div>
-              <div class="footer text-center">
-                <a href="javascript:toggleSignIn();" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+              <div class="text-center" id="signUpStart" style="display:block">
+                  <p>Don't have an account? <a href="javascript:signUp();" class="btn btn-new btn-primary btn-link  btn-lg"><b></b>Sign Up</b></a></p>
+                
+              </div>
+              <div class="text-center" id="LoginStart" style="display:none">
+                  <p>Already have an account? <a href="javascript:loginStart();" class="btn btn-new btn-primary btn-link  btn-lg"><b></b>login</b></a></p>
+                
               </div>
             </form>
           </div>
@@ -272,24 +355,9 @@
 
 
 
-        <div class="col-lg-4 col-md-6" id="fileUpload" style="display:none">
+        <div class="col-lg-4" id="fileUpload" style="display:none">
             <div class="card card-login">
               <form class="form" method="" action="">
-                <div class="card-header card-header-primary text-center">
-                  <h4 class="card-title">Printzo</h4>
-                  <div class="social-line">
-                    <a href="#pablo" class="btn btn-just-icon btn-link">
-                      <i class="fa fa-facebook-square"></i>
-                    </a>
-                    <a href="#pablo" class="btn btn-just-icon btn-link">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                    <a href="#pablo" class="btn btn-just-icon btn-link">
-                      <i class="fa fa-google-plus"></i>
-                    </a>
-                  </div>
-                </div>
-                <p class="description text-center">Or Be Classical</p>
                 <div class="card-body">
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -344,12 +412,13 @@
                   </div>
                   <div class="input-group">
                      
-                      <input type="file" class="form-control">
+                      <input type="file" class="form-control" id="fileUploadActual">
                     </div>
                 </div>
                 <div class="input-group text-center">
-                    <a href="#pablo" class="btn btn-primary btn-link btn-wd btn-lg">Get Started</a>
+                    <a href="javascript:myFileUpload();" class="btn btn-primary btn-link btn-wd btn-lg" >Get Started</a>
                   </div>
+                
 
               </form>
             </div>
@@ -366,8 +435,8 @@
                 ViCaSiN
               </a>
             </li>
-            <li>
-              <a href="https://creative-tim.com/presentation">
+            <li id="linkbox">
+              <a href="">
                 About Us
               </a>
             </li>
