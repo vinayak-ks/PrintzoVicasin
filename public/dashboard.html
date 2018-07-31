@@ -212,13 +212,48 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                         						<a href="javascript: void(0);" target="_blank"
 							class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"
-							data-toggle="modal" data-target="#addSoil">Add new Test Sample</a>
+							data-toggle="modal" data-target="#addCatalogue">Add Catalogue</a>
 
 
                     </div>
                     <!-- /.col-lg-12 -->
 
+                    <!-- modal start -->
+                <div class="modal fade" id="addCatalogue" tabindex="-1" role="dialog"aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" align="center">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">Add New Test Sample</h4>
+                                </div>
+    
+                                <div class="modal-body">
+                              <form >
+                                    <div class="form-group">
+                                            <label class="control-label">Xyzr</label>
+                                            <input class="form-control input-lg" type="text" name="fertilizer">
+                                        </div>
+                                        <div class="form-group">
+                                <label class="control-label">Phone Number</label>
+                                <input type="number" name="phone" required placeholder="9441234567" class="form-control input-lg" id="phone" />
+                                </div>
+                                          <div class="form-group">
+                                <label class="control-label">Survey Number</label>
+                                <input type="text" name="survey_num" required  placeholder="KK834HJJ" class="form-control input-lg"  />
+                                </div>
+                              </form>
+                            </div>
+                            </div>
+                    </div>
 
+                 </div>
+
+                        
+                  
+                    <!-- modal end -->
                 <!-- ============================================================== -->
                 <!-- Other sales widgets -->
                 <!-- ============================================================== -->

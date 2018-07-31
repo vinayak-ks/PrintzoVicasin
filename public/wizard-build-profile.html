@@ -53,22 +53,25 @@
 			var name = document.getElementById("firstname").value;
 			var pnumber = document.getElementById("phoneNumber").value;
 			var xemail = document.getElementById("xemail").value;
+			var city = document.getElementById("city").value;
+			var shopName = document.getElementById("shopName").value;
 	  // A post entry.
 		  var postData = {
 			name: name,
 			pnumber: pnumber,
 			xemail: xemail,
+			shopName: shopName
 
 			
 	  };
 	
 	  // Get a key for a new Post.
-	  var newPostKey = firebase.database().ref().child('xerox').push().key;
+	  var newPostKey = firebase.database().ref().child('xerox').child(city).push().key;
 	
 	  // Write the new post's data simultaneously in the posts list and the user's post list.
 	  //var updates = {};
 	  //updates['/xerox/' + newPostKey] = postData;
-	  return firebase.database().ref('xerox/' + newPostKey).set(postData,function(error) {
+	  return firebase.database().ref('xerox/'+city+'/'+ newPostKey).set(postData,function(error) {
     if (error) {
       alert(error)
     } else {
@@ -124,7 +127,7 @@
 		                    	</div>
 								<div class="wizard-navigation">
 									<ul>
-			                            <li><a href="" data-toggle="tab">About</a></li>
+			                            <li><a href="#about" data-toggle="tab">About</a></li>
 			                            <li><a href="#account" data-toggle="tab">Services</a></li>
 			                            <li><a href="#address" data-toggle="tab">Address</a></li>
 			                        </ul>
@@ -252,19 +255,19 @@
 		                                    <div class="col-sm-7 col-sm-offset-1">
 	                                        	<div class="form-group label-floating">
 	                                        		<label class="control-label">Shop Name</label>
-	                                    			<input type="text" class="form-control">
+	                                    			<input type="text" class="form-control" id="shopName">
 	                                        	</div>
 		                                    </div>
 		                                    <div class="col-sm-3">
 		                                        <div class="form-group label-floating">
 		                                            <label class="control-label">Shop Number</label>
-		                                            <input type="text" class="form-control">
+		                                            <input type="text" class="form-control" id=shopNumber"">
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-sm-5 col-sm-offset-1">
 		                                        <div class="form-group label-floating">
 		                                            <label class="control-label">City</label>
-		                                            <select name="city" class="form-control">
+		                                            <select name="city" class="form-control" id="city">
 														<option disabled="" selected=""></option>
 	                                                	<option value="Bengaluru"> Bengaluru </option>
 	                                                	<option value="Tumakuru"> Tumakuru </option>

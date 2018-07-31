@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Material Kit by Creative Tim
+    Printzo
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -175,17 +175,52 @@
       // file upload start
       
         function myFileUpload(){
+          var storageRef = firebase.storage().ref();
           var downloadURL;
           var file = document.getElementById("fileUploadActual").files[0];
           console.log(file.name);
-          var storageRef = firebase.storage().ref(firebase.auth().currentUser.uid);
-          var thisRef = storageRef.child(file.name);
+          var metadata = {
+        'contentType': file.type
+      };
+      // Push to child path.
+      // [START oncomplete]
+      storageRef.child('images/' + file.name).put(file, metadata).then(function(snapshot) {
+        console.log('Uploaded', snapshot.totalBytes, 'bytes.');
+        console.log('File metadata:', snapshot.metadata);
+        // Let's get a download URL for the file.
+        snapshot.ref.getDownloadURL().then(function(url) {
+          
+          // [START_EXCLUDE]
+          downloadURL=url;
+          console.log('File available at', downloadURL);
+          var cid= firebase.auth().currentUser.uid;
+        var xid = "12345678"
+        var postData = {
+			xid: xid,
+			cid: cid,
+			downloadURL: downloadURL
 
-  //put request upload file to firebase storage
-  thisRef.put(file).then(function(snapshot) {
-    console.log('Uploaded a blob or file!');
-});
+			
+	  };
+        var newPostKey = firebase.database().ref().child('orders').push().key;
+        return firebase.database().ref('orders/' + newPostKey).set(postData,function(error) {
+    if (error) {
+      alert(error)
+    } else {
+		window.location="./user-login-page.html";
+      // Data saved successfully!
+    }
+  });
+          // [END_EXCLUDE]
+        });
+      }).catch(function(error) {
+        // [START onfailure]
+        console.error('Upload failed:', error);
+        // [END onfailure]
+      });
+      // [END oncomplete]
 
+      
   
 
   
@@ -215,11 +250,93 @@
     LoginStart.style.display="none";
   
   }
+
+  // Global vars
+var city_dropdown ;  
+var xerox_dropdown  ; 
+
+
+function makeCityDropdown() {
+
+    firebase.database().ref("cities").once('value')
+
+        .then(snap => {
+            data = snap.val() ; 
+            console.log("Data = " , data);
+
+            Object.values(data).forEach(city => {
+                $("#select_city_dropdown").append(`<option value="${city}">${city}</option>`)
+            })
+            updateXeroxDropdown(Object.values(data)[0]) ; //fill xeroxdropdown for first time with first city 
+
+            return null;
+        })
+        .catch(err => console.log(err))
+
+        city_dropdown.change(() => {
+        var selectedcity = city_dropdown.find(':selected').val() ; 
+        console.log("selection = " , selectedcity);
+        updateXeroxDropdown(selectedcity);
+    })
+}
+
+
+function updateXeroxDropdown(city) {
+    console.log("city = "  , city) ; 
+
+    xerox_dropdown.html('') ; 
+
+    firebase.database().ref('xerox').child(city).once('value')
+        .then(snap=> {
+
+        data = snap.val() ; 
+            /*
+        Expecting data to be like this:
+        {
+            xeroxPushedKey1 : { name : "name" , pnumber : 239423 , xemail : "email" } , 
+            xeroxPushedKey2 : { name : "name" , pnumber : 239423 , xemail : "email" } , 
+            xeroxPushedKey3 : { name : "name" , pnumber : 239423 , xemail : "email" } , 
+            xeroxPushedKey4 : { name : "name" , pnumber : 239423 , xemail : "email" } , 
+        }
+    
+        */
+            console.log(data);
+
+            Object.entries(data).forEach(xeroxKey_detail => {
+                let xeroxKey = xeroxKey_detail[0];
+                let xeroxObject = xeroxKey_detail[1];
+
+                console.log(xeroxKey, xeroxObject);
+
+                $("#select_xeroxShop_dropdown").append(`<option value="${xeroxKey}">${xeroxObject['shopName']}</option>`);
+                $("#select_xeroxShop_dropdown").change(() => {
+
+                    var selectedVal = xerox_dropdown.find(':selected').val();
+                    var selectedText = xerox_dropdown.find(':selected').text();
+                    xeroxBoxSelected(selectedVal, selectedText);
+                });
+            })
+
+            return null;
+        })
+        .catch(err => console.log(err))
+}
+
+
+function xeroxBoxSelected(xeroxKey, xeroxShopName) {
+    //TODO : Rest of the handling logic after user selects xeroxBox
+
+    console.log("Final city selected : " , city_dropdown.find(':selected').text()) ;
+    console.log("Final xerox selection : " , xeroxKey, xeroxShopName);
+}
         
       // file upload end
       window.onload = function() {
         
         initApp();
+        city_dropdown = $("#select_city_dropdown") ; 
+        xerox_dropdown = $("#select_xeroxShop_dropdown") ; 
+        makeCityDropdown() ; 
       };
     </script>
 
@@ -373,13 +490,8 @@
                         <i class="material-icons">mail</i>
                       </span>
                     </div>
-                    <select name="city" class="form-control" placeholde="city">
-                        <option disabled="" selected=""></option>
-                        <option value="Bengaluru"> Bengaluru </option>
-                        <option value="Tumakuru"> Tumakuru </option>
-                        <option value="Hospet"> Hospet </option>
-                        <option value="Shivmoga"> Shivmoga </option>
-                        <option value="...">...</option>
+                    <select name="city" class="form-control" placeholde="city" id="select_city_dropdown">
+                      
                     </select>
                   </div>
                   <div class="input-group">
@@ -389,11 +501,6 @@
                       </span>
                     </div>
                     <select name="area" class="form-control" placeholde="city">
-                        <option disabled="" selected=""></option>
-                        <option value="Bengaluru"> K.S Layout </option>
-                        <option value="Tumakuru"> SIT </option>
-                        
-                        <option value="...">...</option>
                     </select>
                   </div>
                   <div class="input-group">
@@ -402,12 +509,7 @@
                         <i class="material-icons">lock_outline</i>
                       </span>
                     </div>
-                    <select name="xerox shop" class="form-control" placeholde="city">
-                        <option disabled="" selected=""></option>
-                        <option value="xid"> SIT Campus </option>
-                        <option value="Tumakuru"> SIT </option>
-                        
-                        <option value="...">...</option>
+                    <select name="xerox shop" class="form-control"  id="select_xeroxShop_dropdown"> 
                     </select>
                   </div>
                   <div class="input-group">
@@ -435,15 +537,13 @@
                 ViCaSiN
               </a>
             </li>
-            <li id="linkbox">
+            <li>
               <a href="">
                 About Us
               </a>
             </li>
             <li>
-              <a href="http://blog.creative-tim.com">
-                Blog
-              </a>
+                <span id="linkbox"></span>
             </li>
             <li>
               <a href="https://www.creative-tim.com/license">
