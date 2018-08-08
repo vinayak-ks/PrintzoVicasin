@@ -47,35 +47,42 @@
 	
 	  // Get a reference to the database service
 	  
-	
+	  var city_dropdown ; 
+	  var area_dropdown; 
 		function writeNewPost() {
 			
 			var name = document.getElementById("firstname").value;
 			var pnumber = document.getElementById("phoneNumber").value;
 			var xemail = document.getElementById("xemail").value;
-			var city = document.getElementById("city").value;
+			var city = document.getElementById("select_city_dropdown").value;
+			var area = document.getElementById("select_area_dropdown").value;
 			var shopName = document.getElementById("shopName").value;
+			var shopNumber = document.getElementById("shopNumber").value;
 	  // A post entry.
 		  var postData = {
 			name: name,
 			pnumber: pnumber,
 			xemail: xemail,
-			shopName: shopName
+			shopName: shopName,
+			shopNumber:shopNumber,
+			verified:"NO",
+			xid:""
+
 
 			
 	  };
 	
 	  // Get a key for a new Post.
-	  var newPostKey = firebase.database().ref().child('xerox').child(city).push().key;
+	  var newPostKey = firebase.database().ref().child('xerox').child(city).child(area).push().key;
 	
 	  // Write the new post's data simultaneously in the posts list and the user's post list.
 	  //var updates = {};
 	  //updates['/xerox/' + newPostKey] = postData;
-	  return firebase.database().ref('xerox/'+city+'/'+ newPostKey).set(postData,function(error) {
+	  return firebase.database().ref('xerox/'+city+'/'+area+'/'+ newPostKey).set(postData,function(error) {
     if (error) {
       alert(error)
     } else {
-		window.location="./index.html";
+		window.location="./xeroxshop-login.html";
       // Data saved successfully!
     }
   });
@@ -89,6 +96,71 @@
 	
 		
 	}
+	function makeCityDropdown() {
+
+firebase.database().ref("cities").once('value')
+
+	.then(snap => {
+		data = snap.val() ; 
+		console.log("Data = " , data);
+		$("#select_city_dropdown").append(`<option disabled="" selected=""></option>`)
+		Object.values(data).forEach(city => {
+			
+			$("#select_city_dropdown").append(`<option value="${city}">${city}</option>`)
+		})
+		$("#select_city_dropdown").append(`<option value="...">...</option>`)
+		updateAreaDropdown(Object.values(data)[0]) ; //fill xeroxdropdown for first time with first city 
+
+		return null;
+	})
+	.catch(err => console.log(err))
+
+	city_dropdown.change(() => {
+	var selectedcity = city_dropdown.find(':selected').val() ; 
+
+	console.log("selection = " , selectedcity);
+	updateAreaDropdown(selectedcity);
+	})
+}
+
+function updateAreaDropdown(city){
+console.log("Area message" + city);
+area_dropdown.html('');
+firebase.database().ref('areas').child(city).once('value')
+.then(snap=> {
+
+data = snap.val() ; 
+  console.log(data);
+  $("#select_area_dropdown").append(`<option disabled="" selected=""></option>`)
+  Object.entries(data).forEach(area_detail => {
+	 
+	  let areaObject = area_detail[1];
+
+	  console.log( " areaObject: "+ areaObject);
+
+	  $("#select_area_dropdown").append(`<option value="${areaObject}">${areaObject}</option>`);
+	 
+
+	  
+  })
+  $("#select_area_dropdown").append(`<option value="ANY">ANY</option>`)
+
+
+  return null;
+})
+.catch(err => console.log(err))
+
+}
+
+	
+
+	window.onload = function() {
+        
+        
+        city_dropdown = $("#select_city_dropdown") ; 
+        area_dropdown = $("#select_area_dropdown");
+        makeCityDropdown() ; 
+      };
 		
 		</script>
 	
@@ -186,7 +258,7 @@
 		                                    <div class="col-sm-10 col-sm-offset-1">
 		                                        <div class="col-sm-4">
 		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Black and White">
+		                                                <input type="checkbox" name="jobb" value="Black and White" id="bandwP">
 		                                                <div class="icon">
 		                                                    <i class="fa fa-pencil"></i>
 		                                                </div>
@@ -195,7 +267,7 @@
 		                                        </div>
 		                                        <div class="col-sm-4">
 		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Colour">
+		                                                <input type="checkbox" name="jobb" value="Colour" id="colourP">
 		                                                <div class="icon">
 		                                                    <i class="fa fa-terminal"></i>
 		                                                </div>
@@ -204,7 +276,7 @@
 		                                        </div>
 		                                        <div class="col-sm-4">
 		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="lamination">
+		                                                <input type="checkbox" name="jobb" value="lamination" id="laminationP">
 		                                                <div class="icon">
 		                                                    <i class="fa fa-laptop"></i>
 		                                                </div>
@@ -218,7 +290,7 @@
 		                                    <div class="col-sm-10 col-sm-offset-1">
 		                                        <div class="col-sm-4">
 		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Report binding">
+		                                                <input type="checkbox" name="jobb" value="Report binding" id="lammination"> 
 		                                                <div class="icon">
 		                                                    <i class="fa fa-pencil"></i>
 		                                                </div>
@@ -261,30 +333,22 @@
 		                                    <div class="col-sm-3">
 		                                        <div class="form-group label-floating">
 		                                            <label class="control-label">Shop Number</label>
-		                                            <input type="text" class="form-control" id=shopNumber"">
+		                                            <input type="text" class="form-control" id="shopNumber">
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-sm-5 col-sm-offset-1">
 		                                        <div class="form-group label-floating">
 		                                            <label class="control-label">City</label>
-		                                            <select name="city" class="form-control" id="city">
-														<option disabled="" selected=""></option>
-	                                                	<option value="Bengaluru"> Bengaluru </option>
-	                                                	<option value="Tumakuru"> Tumakuru </option>
-	                                                	<option value="Hospet"> Hospet </option>
-														<option value="Shivmoga"> Shivmoga </option>
-														<option value="...">...</option>
+		                                            <select name="city" class="form-control" id="select_city_dropdown">
+															
 	                                            	</select>
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-sm-5">
 		                                        <div class="form-group label-floating">
 		                                            <label class="control-label">Area</label>
-	                                            	<select name="Area" class="form-control">
-														<option disabled="" selected=""></option>
-	                                                	<option value="Ks layout"> Ks layout </option>
-	                                                	<option value="Baswangudi"> Baswangudi </option>
-	                                                	<option value="...">...</option>
+	                                            	<select name="Area" class="form-control" id="select_area_dropdown">
+														
 	                                            	</select>
 		                                        </div>
 		                                    </div>

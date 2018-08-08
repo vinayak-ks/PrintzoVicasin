@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="/plugins/images/favicon.png">
-    <title>Kisan Mitra</title>
+    <title>Printzo</title>
     <!-- Bootstrap Core CSS -->
     <link href="/assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -55,10 +55,35 @@
         if(firebase.auth().currentUser){
           
           firebase.auth().signOut();
-          window.location='./index.html';
+          window.location='./xeroxshop-login.html';
           
         }
     }
+        // start of upload catalogue
+        function onUpdateCatalogueClick(){
+        var cname = document.getElementById("cname").value;
+        var cprice = document.getElementById("cprice").value;
+        var college = document.getElementById("college").value;
+        var catalogue_description = document.getElementById("catalogue_description").value;
+        var uid = firebase.auth().currentUser.uid;
+        var postData= {
+            cname : cname,
+            cprice : cprice,
+            college : college,
+            catalogue_description:catalogue_description
+        };
+        var newPostKey = firebase.database().ref().child('Catalogue').child(uid).push().key;
+        
+ var check = firebase.database().ref('Catalogue/'+uid+'/'+ newPostKey).set(postData,function(error) {
+  if (error) {
+    alert(error)
+  } else {
+      window.location="./dashboard.html";
+    // Data saved successfully!
+  }
+});
+        }
+        //end of upload catalogue
     function initApp() {
         // Listening for auth state changes.
         // [START authstatelistener]
@@ -68,12 +93,12 @@
           // [END_EXCLUDE]
           if (user) {
             // User is signed in.
-           alert(user)
+          
           
               
      } else{
             
-           window.location="./index.html"; 
+           window.location="./xeroxshop-login.html"; 
           }
           // [START_EXCLUDE silent]
           
@@ -108,7 +133,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="xeroxshop-login.html">
                         <!-- Logo icon image, you can use font-icon also --><b>
                         <!--This is dark logo icon--><img src="/plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
                      </b>
@@ -142,7 +167,7 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
                             <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                            <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                            
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
                             <li role="separator" class="divider"></li>
@@ -167,16 +192,26 @@
                 <div class="sidebar-head">
                     <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
-
+                        <li class="user-pro">
+                                <a href="#" class="waves-effect"><img src="/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> Steve Gection<span class="fa arrow"></span></span>
+                                </a>
+                                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                                    <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
+                                    <li><a href="javascript:void(0)"><i class="ti-wallet"></i> <span class="hide-menu">My Balance</span></a></li>
+                                   
+                                    <li><a href="javascript:void(0)"><i class="ti-settings"></i> <span class="hide-menu">Account Setting</span></a></li>
+                                    <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
+                                </ul>
+                            </li>
                     
-
+                    <li><a href="#addCatalogue" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu"> Services </span></a>
                     
-                    <li><a href="#addCatalogue" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">catalogue</span></a>
+                    <li><a href="#addCatalogue" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Catalogue</span></a>
 
                     </li>
 
                     <li class="devider"></li>
-                    <li><a href="#addCatalogue" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span class="hide-menu">About Us</span></a></li>
+                    <li><a href="#aboutUs" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span class="hide-menu">About Us</span></a></li>
 
                 </ul>
             </div>
@@ -210,24 +245,33 @@
                                         aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <h4 class="modal-title" id="myModalLabel">Add New Test Sample</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Add New Catalogue</h4>
                                 </div>
     
                                 <div class="modal-body">
-                              <form >
-                                    <div class="form-group">
-                                            <label class="control-label">Xyzr</label>
-                                            <input class="form-control input-lg" type="text" name="fertilizer">
-                                        </div>
                                         <div class="form-group">
-                                <label class="control-label">Phone Number</label>
-                                <input type="number" name="phone" required placeholder="9441234567" class="form-control input-lg" id="phone" />
-                                </div>
-                                          <div class="form-group">
-                                <label class="control-label">Survey Number</label>
-                                <input type="text" name="survey_num" required  placeholder="KK834HJJ" class="form-control input-lg"  />
-                                </div>
-                              </form>
+                                                <label class="control-label">Catalogue Name</label>
+                                                <input class="form-control input-lg" type="text" id="cname">
+                                            </div>
+                                            <div class="form-group">
+                                    <label class="control-label">Price</label>
+                                    <input type="number" id="cprice"  class="form-control input-lg" id="phone" />
+                                    </div>
+                                              <div class="form-group">
+                                    <label class="control-label">College</label>
+                                    <input type="text" id="college" class="form-control input-lg"  />
+                                    </div>
+                                     <div class="form-group">
+                                            <label class="control-label">Description</label>
+                                            <textarea class="form-control" rows="5" id="catalogue_description"></textarea>
+                                            <!-- <textarea type="text" id="catalogue_description" class="form-control input-lg"  /> -->
+                                            </div> 
+                                    <div class="form-group">
+                                       <button class="btn btn-primary" onclick="onUpdateCatalogueClick()">Submit</button>
+                                      
+                                        </div>
+                              
+                              
                             </div>
                             </div>
                     </div>
@@ -252,7 +296,7 @@
                                             </li>
                                             <li class="col-last"><h3 class="counter text-right m-t-15">23</h3></li>
                                             <li class="col-middle">
-                                                <h4>Total requests</h4>
+                                                <h4 id="DummyID1"> Total requests</h4>
                                                 <div class="progress">
                                                   <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                                       <span class="sr-only">40% Complete (success)</span>
@@ -269,7 +313,7 @@
                                             </li>
                                             <li class="col-last"><h3 class="counter text-right m-t-15">76</h3></li>
                                             <li class="col-middle">
-                                                <h4>Total Earnings</h4>
+                                                <h4 id="DummyID2">Services</h4>
                                                 <div class="progress">
                                                   <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                                       <span class="sr-only">40% Complete (success)</span>
@@ -312,7 +356,9 @@
                                                <div class="sttabs tabs-style-iconbox">
                                                    <nav>
                                                        <ul>
-                                                           <li><a href="#section-iconbox-1" class="sticon ti-user"><span>Select Users</span></a></li>
+                                                           <li><a href="#section-iconbox-1" class="sticon ti-user"><span>Order Requests</span></a></li>
+                                                           <li><a href="#section-iconbox-4" class="sticon ti-user"><span>Catalogue</span></a></li>
+                                                           <li><a href="#section-iconbox-3" class="sticon ti-user"><span>Services</span></a></li>
                                                            
                                                        </ul>
                                                    </nav>
@@ -571,7 +617,7 @@
                                                        </section>
                
                
-                                                       <section id="section-iconbox-4">
+                                                       <section id="section-iconbox-3">
                                                            <div class="p-20 row">
                                                                <div class="col-sm-6">
                                                                    <h3 class="m-t-0">Save and finish</h3></div>
@@ -665,6 +711,100 @@
                                                                </table>
                                                            </div>
                                                        </section>
+                                                       <section id="section-iconbox-4">
+                                                            <div class="p-20 row">
+                                                                <div class="col-sm-6">
+                                                                    <h3 class="m-t-0">Save and finish</h3></div>
+                                                                <div class="col-sm-6">
+                                                                    <ul class="side-icon-text pull-right">
+                                                                        <li><a href="#"><span class="circle circle-sm bg-success di"><i class="ti-plus"></i></span><span>Add Users</span></a></li>
+                                                                        <li><a href="#"><span class="circle circle-sm bg-danger di"><i class="ti-pencil-alt"></i></span><span>Edit</span></a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="table-responsive manage-table">
+                                                                <table class="table" cellspacing="14">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th></th>
+                                                                            <th></th>
+                                                                            <th></th>
+                                                                            <th>NAME</th>
+                                                                            <th>POSITION</th>
+                                                                            <th>JOINED</th>
+                                                                            <th>LOCATION</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr class="advance-table-row">
+                                                                            <td width="10"></td>
+                                                                            <td width="40">
+                                                                                <div class="checkbox checkbox-circle checkbox-info">
+                                                                                    <input id="checkbox7" type="checkbox">
+                                                                                    <label for="checkbox7"> </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td width="60"><img src="../plugins/images/users/varun.jpg" class="img-circle" width="30" /></td>
+                                                                            <td>Andrew Simons</td>
+                                                                            <td>Modulator</td>
+                                                                            <td>6 May 2016</td>
+                                                                            <td>Gujrat, India</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="7" class="sm-pd"></td>
+                                                                        </tr>
+                                                                        <tr class="advance-table-row">
+                                                                            <td></td>
+                                                                            <td>
+                                                                                <div class="checkbox checkbox-circle checkbox-info">
+                                                                                    <input id="checkbox7" type="checkbox">
+                                                                                    <label for="checkbox7"> </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td><img src="../plugins/images/users/genu.jpg" class="img-circle" width="30" /></td>
+                                                                            <td>Hanna Gover</td>
+                                                                            <td>Admin</td>
+                                                                            <td>13 Jan 2005</td>
+                                                                            <td>Texas, United states</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="7" class="sm-pd"></td>
+                                                                        </tr>
+                                                                        <tr class="advance-table-row">
+                                                                            <td></td>
+                                                                            <td>
+                                                                                <div class="checkbox checkbox-circle checkbox-info">
+                                                                                    <input id="checkbox7" type="checkbox">
+                                                                                    <label for="checkbox7"> </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td><img src="../plugins/images/users/sonu.jpg" class="img-circle" width="30" /></td>
+                                                                            <td>Joshi Nirav</td>
+                                                                            <td>Admin</td>
+                                                                            <td>21 Mar 2001</td>
+                                                                            <td>Bhavnagar, India</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td colspan="7" class="sm-pd"></td>
+                                                                        </tr>
+                                                                        <tr class="advance-table-row active">
+                                                                            <td></td>
+                                                                            <td>
+                                                                                <div class="checkbox checkbox-circle checkbox-info">
+                                                                                    <input id="checkbox7" checked="" type="checkbox">
+                                                                                    <label for="checkbox7"> </label>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td><img src="../plugins/images/users/pawandeep.jpg" class="img-circle" width="30" /></td>
+                                                                            <td>Joshi Sunil</td>
+                                                                            <td>Admin</td>
+                                                                            <td>21 Mar 2004</td>
+                                                                            <td>Gujarat, India</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </section>
                                                    </div>
                                                    <!-- /content -->
                                                </div>

@@ -11,7 +11,7 @@
 
 
 
-ref = firebase.database().ref('/xerox') ;
+ref = firebase.database().ref('/xerox').child() ;
 function createUserFromRow(email){
   
   
@@ -19,6 +19,8 @@ function createUserFromRow(email){
 console.log("This is doing ! ") ;
 ref.once('value', snap=>{
   obj = snap.val() ;
+
+  console.log(obj);
   
   Object.keys(obj).map((sample_no , index) =>{
     data = obj[sample_no] ;
